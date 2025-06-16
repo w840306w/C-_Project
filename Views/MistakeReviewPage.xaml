@@ -38,13 +38,12 @@
 
                             <Label Text="{Binding PartOfSpeech}"
                                    TextColor="Gray"
-                                   FontAttributes="Italic"
+                                   FontAttributes="Bold"
                                    FontSize="20"
                                    HorizontalOptions="End"/>
 
-
                         </VerticalStackLayout>
-
+                        
                     </Grid>
                 </Frame>
             </DataTemplate>

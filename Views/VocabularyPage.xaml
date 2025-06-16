@@ -27,7 +27,7 @@
                                    Grid.Row="1" />
 
                         <Label Text="{Binding PartOfSpeech}"
-                                   FontAttributes="Italic"
+                                   FontAttributes="Bold"
                                    TextColor="DarkSlateGray"
                                    VerticalOptions="End"
                                    HorizontalOptions="End"

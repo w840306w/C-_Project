@@ -15,8 +15,6 @@ public partial class IndexPage : ContentPage, INotifyPropertyChanged
     private List<Vocabulary> _allWords = new();
     private readonly Random _random = new();
 
-    private CancellationTokenSource _speechCancellationTokenSource;
-
     private Vocabulary _dailyWord;
     public Vocabulary DailyWord { get => _dailyWord; set { _dailyWord = value; OnPropertyChanged(); } }
 
