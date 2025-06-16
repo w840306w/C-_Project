@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="MauiApp1.Views.Settings">
+
+    <Frame VerticalOptions="Center" HorizontalOptions="Center" CornerRadius="10" Padding="20" Margin="20" BorderColor="LightGray">
+        <VerticalStackLayout Spacing="15" WidthRequest="300">
+            <Label Text="語音設定" FontSize="Title" FontAttributes="Bold" HorizontalOptions="Center"/>
+
+            <Label x:Name="VolumeLabel" Text="音量" />
+            <Slider x:Name="VolumeSlider" Minimum="0.0" Maximum="1.0"
+                    ValueChanged="VolumeSlider_ValueChanged"/>
+
+            <Label x:Name="PitchLabel" Text="音調" />
+            <Slider x:Name="PitchSlider" Minimum="0.0" Maximum="2.0"
+                    ValueChanged="PitchSlider_ValueChanged"/>
+
+            <Label Text="口音選擇" Margin="0,10,0,0"/>
+            <Picker x:Name="AccentPicker" Title="選擇口音"
+                    SelectedIndexChanged="AccentPicker_SelectedIndexChanged">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>US</x:String>
+                        <x:String>UK</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Button Text="關閉" Clicked="OnClose_Clicked" Margin="0,20,0,0"/>
+        </VerticalStackLayout>
+    </Frame>
+</toolkit:Popup>

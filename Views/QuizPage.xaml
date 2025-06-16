@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MauiApp1.Models"
+             x:Class="MauiApp1.Views.QuizPage"
+             Title="{Binding PageTitle}">
+
+    <Grid RowDefinitions="Auto, *">
+
+        <Label Text="{Binding ProgressText}"
+               IsVisible="{Binding IsAnswering}"
+               FontSize="16" TextColor="Gray" HorizontalOptions="Center" Margin="0,10,0,0" />
+        <Label Text="{Binding FinalScoreText}"
+               IsVisible="{Binding IsReviewing}"
+               FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,10,0,0" />
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="15" Padding="20">
+
+                <VerticalStackLayout Spacing="15" IsVisible="{Binding IsAnswering}">
+                    <Label Text="請根據提示拼出完整單字：" FontSize="18"/>
+                    <Label Text="{Binding Hint}" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" />
+                    <Label Text="{Binding MaskedWord}" FontSize="32" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,10" />
+                    <Button Text="唸出單字 🔊" Margin="0,5,0,10" HorizontalOptions="Center" Clicked="SpeakButton_Clicked" IsEnabled="{Binding IsAnswering}"/>
+                    <Entry Text="{Binding UserAnswer}" Placeholder="請在此輸入答案" HorizontalOptions="Fill" IsEnabled="{Binding IsAnswering}" Completed="NextButton_Clicked"/>
+                </VerticalStackLayout>
+
+                <CollectionView ItemsSource="{Binding SessionWords}" IsVisible="{Binding IsReviewing}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Vocabulary">
+                            <Frame Padding="10" Margin="0,5" BorderColor="LightGray" CornerRadius="8">
+                                <VerticalStackLayout Spacing="5">
+                                    <HorizontalStackLayout Spacing="10">
+                                        <Label FontSize="20" VerticalOptions="Center">
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding IsCorrect}" Value="True">
+                                                    <Setter Property="Text" Value="✔️"/>
+                                                    <Setter Property="TextColor" Value="Green"/>
+                                                </DataTrigger>
+                                                <DataTrigger TargetType="Label" Binding="{Binding IsCorrect}" Value="False">
+                                                    <Setter Property="Text" Value="❌"/>
+                                                    <Setter Property="TextColor" Value="Red"/>
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                        <Label Text="{Binding Word}" FontSize="20" FontAttributes="Bold" VerticalOptions="Center"/>
+                                    </HorizontalStackLayout>
+
+                                    <Label Margin="30,2,0,0">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Definition}" TextColor="DarkSlateGray"/>
+                                                <Span Text=" "/>
+                                                <Span Text="{Binding PartOfSpeech, StringFormat='({0})'}" TextColor="Gray" FontAttributes="Italic"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <HorizontalStackLayout Margin="30,5,0,0" Spacing="5">
+                                        <Label Text="你的答案:" TextColor="Gray"/>
+                                        <Label Text="{Binding UserAnswer}">
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding IsCorrect}" Value="False">
+                                                    <Setter Property="TextColor" Value="Red"/>
+                                                    <Setter Property="TextDecorations" Value="Strikethrough"/>
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                    </HorizontalStackLayout>
+
+                                </VerticalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10" Margin="0,20,0,0">
+                    <Button Grid.Column="0" Text="上一題" Clicked="PreviousButton_Clicked" IsVisible="{Binding IsAnswering}" IsEnabled="{Binding IsAnswering}"/>
+                    <Button Grid.Column="1" Text="完成測驗" Clicked="FinishQuizButton_Clicked" IsVisible="{Binding IsAnswering}" IsEnabled="{Binding IsAnswering}"/>
+                    <Button Grid.Column="2" Text="下一題" Clicked="NextButton_Clicked" IsVisible="{Binding IsAnswering}" IsEnabled="{Binding IsAnswering}"/>
+                    <Button Grid.Column="0" Grid.ColumnSpan="3" Text="返回主選單" Clicked="GoBackButton_Clicked" IsVisible="{Binding IsReviewing}"/>
+                </Grid>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

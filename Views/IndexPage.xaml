@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MauiApp1.Models"
+             x:Class="MauiApp1.Views.IndexPage"
+             Title="首頁">
+
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="20">
+
+
+            <Label Text="每日一字" FontSize="Title" FontAttributes="Bold" HorizontalOptions="Center"/>
+
+            <Grid Margin="10,0">
+
+                <Border x:Name="CardBorder"
+                        Stroke="#512BD4"
+                        StrokeThickness="2"
+                        Padding="15">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10" />
+                    </Border.StrokeShape>
+
+                     <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto" RowSpacing="5">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnWordOfTheDay_Tapped" />
+                        </Grid.GestureRecognizers>
+                        <Label Grid.Row="0" Grid.Column="0" VerticalOptions="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding DailyWord.Word}" FontSize="25" FontAttributes="Bold" TextColor="#512BD4" />
+                                    <Span Text=" "/>
+                                    <Span Text="{Binding DailyWord.PartOfSpeech, StringFormat='({0})'}" TextColor="Gray" FontAttributes="Italic" FontSize="20"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <ImageButton Grid.Row="0" Grid.Column="1"
+                                     VerticalOptions="Start"  
+                                     HorizontalOptions="End"
+                                     Clicked="SpeakDailyWord_Clicked"
+                                     HeightRequest="35"
+                                     WidthRequest="35">
+                            <ImageButton.Source>
+                                <FontImageSource Glyph="🔊" Color="#512BD4"/>
+                            </ImageButton.Source>
+                        </ImageButton>
+                            <Label Grid.Row="1" Grid.Column="0" Text="{Binding DailyWord.Definition}" FontSize="18"/>
+                            <ImageButton Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" Clicked="SpeakDailyWord_Clicked"  />
+                        <Label Grid.Row="1" Grid.Column="0" 
+                               Grid.ColumnSpan="2" VerticalOptions="End"
+                               HorizontalOptions="End" Text="點擊更換單字" 
+                               FontSize="10" TextColor="Gray" FontAttributes="Italic"/>
+                    </Grid>
+                </Border>
+
+                <BoxView x:Name="LightDot"
+                         WidthRequest="40"
+                         HeightRequest="40"
+                         HorizontalOptions="Start"
+                         VerticalOptions="Start"
+                         AnchorX="0.5"
+                         AnchorY="0.5">
+                    <BoxView.Background>
+                        <RadialGradientBrush>
+                            <GradientStop Color="White" Offset="0.0" />
+                            <GradientStop Color="Transparent" Offset="1.0" />
+                        </RadialGradientBrush>
+                    </BoxView.Background>
+                </BoxView>
+
+            </Grid>
+            <Grid ColumnSpacing="15"
+                  RowSpacing="15"
+                  Margin="0,20,0,0">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Row="0" Grid.Column="0" 
+                        Text="學習"
+                        FontSize="40"
+                        HeightRequest="150"
+                        BackgroundColor="#DCD13B"
+                        Clicked="Button_Clicked_Learn" />
+
+                <Button Grid.Row="0" Grid.Column="1"
+                        Text="測驗"
+                        FontSize="40"
+                        HeightRequest="150"
+                        BackgroundColor="#BD9ADB"
+                        Clicked="Button_Clicked_Test" />
+
+                <Button Grid.Row="1" Grid.Column="0" 
+                        Text="複習"
+                        FontSize="40"
+                        HeightRequest="150"
+                        BackgroundColor="#D98C85"
+                        Clicked="Button_Clicked_Review" />
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

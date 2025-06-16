@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.Views.QuizSelectionPage"
+             Title="選擇題目數量">
+    <VerticalStackLayout Spacing="15"
+                         Padding="30"
+                         VerticalOptions="Center">
+
+        <Label Text="請選擇本次測驗的題目數量"
+               FontSize="22"
+               HorizontalOptions="Center"
+               Margin="0,0,0,20"/>
+
+        <Button Text="5 題" CommandParameter="5" Clicked="OnQuantitySelected_Clicked" HeightRequest="60" FontSize="20"/>
+        <Button Text="10 題" CommandParameter="10" Clicked="OnQuantitySelected_Clicked" HeightRequest="60" FontSize="20"/>
+        <Button Text="15 題" CommandParameter="15" Clicked="OnQuantitySelected_Clicked" HeightRequest="60" FontSize="20"/>
+        <Button Text="20 題" CommandParameter="20" Clicked="OnQuantitySelected_Clicked" HeightRequest="60" FontSize="20"/>
+
+    </VerticalStackLayout>
+</ContentPage>

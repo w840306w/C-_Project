@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<linker>
+	<assembly fullname="MauiApp1">
+		<type fullname="MauiApp1.Models.*" preserve="all"/>
+		<type fullname="MauiApp1.Services.*" preserve="all"/>
+	</assembly>
+
+	<assembly fullname="sqlite-net-pcl" preserve="all" />
+
+	<assembly fullname="CommunityToolkit.Maui" preserve="all" />
+	<assembly fullname="CommunityToolkit.Maui.Core" preserve="all" />
+</linker>
